@@ -17,14 +17,27 @@ export const fetchArticlesFailure = (error) => ({
   payload: error
 });
 
-export default () => {
+export const fetchArticles = () => {
   return (dispatch) => {
     dispatch(fetchArticlesRequest());
     return axios.get(`${API_URL}/articles`)
       .then(res => {
-        dispatch(fetchArticlesSuccess(res.data.articles));
-      })
+        dispatch(fetchArticlesSuccess(res.data));
+      }) 
       .catch(error => {
+        dispatch(fetchArticlesFailure(error.message));
+      });
+  };
+};
+
+export const fetchArticlesByTopic = (topic) => {
+  return (dispatch) => {
+    dispatch(fetchArticlesRequest());
+    return axios.get(`${API_URL}/topics/${topic}/articles`)
+      .then((res) => {
+        dispatch(fetchArticlesSuccess(res.data));
+      })
+      .catch((error) => {
         dispatch(fetchArticlesFailure(error.message));
       });
   };
