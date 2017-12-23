@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import test from './test';
+import test from './testReducer';
 import articles from './articleReducer';
 
 const reducer = combineReducers({
