@@ -17,14 +17,20 @@ export const fetchCommentsFailure = (error) => ({
   payload: error
 });
 
-export const fetchComments = (article_id) => {
+
+export const fetchComments = (id) => {
   return (dispatch) => {
-    dispatch(fetchCommentsRequest(article_id));
-    return axios.get(`${API_URL}/articles/${article_id}/comments`)
-      .then(({data}) => {
-        dispatch(fetchCommentsSuccess(data.comments));
+    dispatch(fetchCommentsRequest());
+    return axios.get(`${API_URL}/articles/${id}/comments`)
+      .then((res) => {
+        return res.data.sort((a, b) => {
+          return b.created_at - a.created_at;
+        });
       })
-      .catch(error => {
+      .then((sortedComments) => {
+        dispatch(fetchCommentsSuccess(sortedComments));
+      })
+      .catch((error) => {
         dispatch(fetchCommentsFailure(error.message));
       });
   };
