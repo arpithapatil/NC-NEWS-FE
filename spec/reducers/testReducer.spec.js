@@ -17,7 +17,7 @@ describe('reducer', () => {
     });
   });
   describe('handles TOGGLE_TEST action', () => {
-    it('flips the state.test boolean', () => {
+    it('flips the state of the test boolean', () => {
       let newState;
       const action = actionCreators.toggleTest();
       newState = testReducer(undefined, action);
