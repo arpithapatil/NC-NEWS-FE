@@ -3,7 +3,7 @@ import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import {fetchComments,fetchCommentsRequest, fetchCommentsSuccess, fetchCommentsFailure}
+import {fetchComments,fetchCommentsRequest, fetchCommentsSuccess, fetchCommentsFailure, postCommentFailure, postCommentSuccess, postCommentRequest, postComment}
   from '../../src/actions/comment';
 
 import {API_URL} from '../../config';
@@ -46,6 +46,51 @@ describe('Comment actions', () => {
       
       const store = mockStore();
       return store.dispatch(fetchComments(article_id))
+        .then(() => {
+          expect(store.getActions()).to.eql(expectedActions);
+        });
+    });
+  });
+
+  describe('postComments', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('dispatches POST_COMMENT_SUCCESS and responds with status code 200 and comments', () => {
+      const article_id = '5a13f64ad7681349fcb82bb1';
+      const comment = 'good morning';
+      nock(API_URL)
+        .post(`/articles/${article_id}/comments`, {'comment': comment})
+        .reply(200, [{
+          body: comment, created_by: 'northcoder'
+        }]);
+      
+      const expectedActions = [
+        postCommentRequest(),
+        postCommentSuccess([{body: comment, created_by: 'northcoder'}])
+      ];
+  
+      const store = mockStore();
+      return store.dispatch(postComment(article_id, comment))
+        .then(() => {
+          expect(store.getActions()).to.eql(expectedActions);
+        });
+    });
+    it('dispatches POST_COMMENT_FAILURE when responds with an error', () => {
+      const article_id = '3786';
+      const comment = 'good morning';
+      const error = 'Invalid article ID';
+      nock(API_URL)
+        .post(`/articles/${article_id}/comments`, {'comment': comment})
+        .replyWithError({'message': error});
+      
+      const expectedActions = [
+        postCommentRequest(),
+        postCommentFailure(error)
+      ];
+  
+      const store = mockStore();
+      return store.dispatch(postComment(article_id, comment))
         .then(() => {
           expect(store.getActions()).to.eql(expectedActions);
         });

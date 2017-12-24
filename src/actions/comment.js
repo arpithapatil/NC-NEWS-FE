@@ -17,6 +17,20 @@ export const fetchCommentsFailure = (error) => ({
   payload: error
 });
 
+export const postCommentRequest = () => ({
+  type: types.POST_COMMENTS_REQUEST
+});
+  
+export const postCommentSuccess = (data) => ({
+  type: types.POST_COMMENTS_SUCCESS,
+  payload: data
+});
+  
+export const postCommentFailure = (error) => ({
+  type: types.POST_COMMENTS_FAILURE,
+  payload: error
+});
+
 
 export const fetchComments = (id) => {
   return (dispatch) => {
@@ -32,6 +46,29 @@ export const fetchComments = (id) => {
       })
       .catch((error) => {
         dispatch(fetchCommentsFailure(error.message));
+      });
+  };
+};
+
+export const postComment = (id, comment) => {
+  return (dispatch) => {
+    dispatch(postCommentRequest());
+    return axios.post(`${API_URL}/articles/${id}/comments`, {'comment': comment})
+      .then((res) => {
+        if (res.data.length > 1) {
+          return res.data.filter((comment) => {
+            return comment.belongs_to === id; 
+          }).sort((a, b) => {
+            return b.created_at - a.created_at;
+          });
+        }
+        else return res.data;
+      })
+      .then((comments) => {
+        dispatch(postCommentSuccess(comments));
+      })
+      .catch((error) => {
+        dispatch(postCommentFailure(error.message));
       });
   };
 };
