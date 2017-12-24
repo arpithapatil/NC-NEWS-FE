@@ -21,10 +21,10 @@ export const fetchArticles = () => {
   return (dispatch) => {
     dispatch(fetchArticlesRequest());
     return axios.get(`${API_URL}/articles`)
-      .then(res => {
+      .then((res) => {
         dispatch(fetchArticlesSuccess(res.data));
-      }) 
-      .catch(error => {
+      })
+      .catch((error) => {
         dispatch(fetchArticlesFailure(error.message));
       });
   };

@@ -34,13 +34,14 @@ describe('Comment actions', () => {
     });
     it('dispatches FETCH_COMMENTS_FAILURE when responds with an error', () => {
       const article_id = 'apple';
+      const error = 'Page not found';
       nock(API_URL)
         .get(`/articles/${article_id}/comments`)
-        .replyWithError({'message': 'error'});
+        .replyWithError({'message': error});
           
       const expectedActions = [
         fetchCommentsRequest(),
-        fetchCommentsFailure('error')
+        fetchCommentsFailure(error)
       ];
       
       const store = mockStore();

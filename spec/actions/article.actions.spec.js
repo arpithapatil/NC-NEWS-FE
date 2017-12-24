@@ -11,85 +11,83 @@ import  {API_URL} from '../../config';
 
 const mockStore = configureMockStore([thunk]);
 
-describe('async action creators', () => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
-  describe('fetchAllArticles', () => {
-    it('dispatches FETCH_ALL_ARTICLES_SUCCESS when fetching articles reponds with 200 and data', () => {
+describe('Article actions', () => {
+  describe('fetchArticles', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('dispatches FETCH_ARTICLES_SUCCESS and responds with status code 200 and all articles', () => {
       nock(API_URL)
         .get('/articles')
-        .reply(200, [1, 2, 3]);
-      
+        .reply(200, [1,2,3]);
+        
       const expectedActions = [
         fetchArticlesRequest(),
-        fetchArticlesSuccess([1, 2, 3])
+        fetchArticlesSuccess([1,2,3])
       ];
-
+    
       const store = mockStore();
-
       return store.dispatch(fetchArticles())
         .then(() => {
           expect(store.getActions()).to.eql(expectedActions);
         });
     });
-    it('dispatches FETCH_ALL_ARTICLES_FAILURE when fetching articles reponds with an error', () => {
+    it('dispatches FETCH_ARTICLES_FAILURE when responds with an error', () => {
       nock(API_URL)
         .get('/articles')
         .replyWithError({'message': 'error'});
-      
+        
       const expectedActions = [
         fetchArticlesRequest(),
         fetchArticlesFailure('error')
       ];
-
+    
       const store = mockStore();
-
       return store.dispatch(fetchArticles())
         .then(() => {
           expect(store.getActions()).to.eql(expectedActions);
         });
     });
+  });
 
-    describe('fetchArticlesByTopic', () => {
-      afterEach(() => {
-        nock.cleanAll();
-      });
-      it('dispatches FETCH_ARTICLES_SUCCESS and responds with status code 200 and articles', () => {
-        const topic = 'coding';
-        nock(API_URL)
-          .get(`/topics/${topic}/articles`)
-          .reply(200, [1, 2, 3]);
-        
-        const expectedActions = [
-          fetchArticlesRequest(),
-          fetchArticlesSuccess([1,2,3])
-        ];
     
-        const store = mockStore();
-        return store.dispatch(fetchArticlesByTopic(topic))
-          .then(() => {
-            expect(store.getActions()).to.eql(expectedActions);
-          });
-      });
-      it('dispatches FETCH_ARTICLES_FAILURE when responds with an error', () => {
-        const error = 'Topic not Found';
-        const topic = 'blue';
-        nock(API_URL)
-          .get(`/topics/${topic}/articles`)
-          .replyWithError({'message': error});
-        
-        const expectedActions = [
-          fetchArticlesRequest(),
-          fetchArticlesFailure(error)
-        ];
+});describe('fetchArticlesByTopic', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+  it('dispatches FETCH_ARTICLES_SUCCESS and responds with status code 200 and articles', () => {
+    const topic = 'coding';
+    nock(API_URL)
+      .get(`/topics/${topic}/articles`)
+      .reply(200, [1,2,3]);
     
-        const store = mockStore();
-        return store.dispatch(fetchArticlesByTopic(topic))
-          .then(() => {
-            expect(store.getActions()).to.eql(expectedActions);
-          });
+    const expectedActions = [
+      fetchArticlesRequest(),
+      fetchArticlesSuccess([1,2,3])
+    ];
+
+    const store = mockStore();
+    return store.dispatch(fetchArticlesByTopic(topic))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
       });
-    });
+  });
+  it('dispatches FETCH_ARTICLES_FAILURE when responds with an error', () => {
+    const error = 'Topic not Found';
+    const topic = 'blue';
+    nock(API_URL)
+      .get(`/topics/${topic}/articles`)
+      .replyWithError({'message': error});
+    
+    const expectedActions = [
+      fetchArticlesRequest(),
+      fetchArticlesFailure(error)
+    ];
+
+    const store = mockStore();
+    return store.dispatch(fetchArticlesByTopic(topic))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
   });
 });
