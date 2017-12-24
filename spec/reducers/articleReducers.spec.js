@@ -1,47 +1,93 @@
 import {expect} from 'chai';
-import articlesReducer, {initialState} from '../../src/reducers/articleReducer';
-import {
-  fetchArticlesRequest,
-  fetchArticlesSuccess,
-  fetchArticlesFailure
-} from '../../src/actions/article';
+import articlesReducer, {getInitialState} from '../../src/reducers/articleReducer';
 
-describe('articles reducer', () => {
+import * as actionCreators from '../../src/actions/article';
+
+describe('articleReducer', () => {
   describe('default behaviour', () => {
     it('returns the passed previous state if an unrecognised action is passed', () => {
+      const prevState = getInitialState();
       const action = {type: 'whatever'};
-      const newState = articlesReducer(initialState, action);
-      expect(newState).to.equal(initialState);
+      const newState = articlesReducer(prevState, action);
+      expect(newState).to.equal(prevState);
     });
     it('uses the initial state if no previous state is passed', () => {
       const action = {type: 'whatever'};
       const newState = articlesReducer(undefined, action);
-      expect(newState).to.equal(initialState);
+      expect(newState).to.eql(getInitialState()); 
     });
   });
-  it('handles FETCH_ARTICLES_REQUEST', () => {
-    const action = fetchArticlesRequest();
-    const newState = articlesReducer(undefined, action);
-    expect(newState.loading).to.be.true;
-    expect(newState.error).to.be.null;
-    expect(newState.data).to.eql([]);
+  describe('fetchArticles', () => {
+    it('handles FETCH_ARTICLES_REQUEST', () => {
+      const prevState = getInitialState();
+      const action = actionCreators.fetchArticlesRequest();
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(true);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(null);
+    });
+    it('handles FETCH_ARTICLES_SUCCESS', () => {
+      const data = [3,6,9,12];
+      const prevState = getInitialState();
+      const action = actionCreators.fetchArticlesSuccess(data);
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql(data);
+      expect(newState.error).to.equal(null);
+    });
+    it('should not mutate previous state', () => {
+      const data = [3,6,9,12];
+      const prevState = getInitialState();
+      const action = actionCreators.fetchArticlesSuccess(data);
+      const newState = articlesReducer(prevState, action);
+      expect(newState).to.not.equal(prevState);
+      expect(newState.data).to.not.equal(prevState.data);
+    });
+    it('handles FETCH_ARTICLES_FAILURE', () => {
+      const err = 'something went wrong';
+      const prevState = getInitialState();
+      const action = actionCreators.fetchArticlesFailure(err);
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(err);
+    });
   });
-  it('handles FETCH_ARTICLES_SUCCESS', () => {
-    const prevState = articlesReducer(undefined, fetchArticlesRequest());
-    const data = [1, 2, 3];
-    const action = fetchArticlesSuccess(data);
-    const newState = articlesReducer(prevState, action);
-    expect(newState.loading).to.be.false;
-    expect(newState.error).to.be.null;
-    expect(newState.data).to.eql(data);
-  });
-  it('handles FETCH_ARTICLES_FAILURE', () => {
-    const prevState = articlesReducer(undefined, fetchArticlesRequest());
-    const error = 'Something went wrong';
-    const action = fetchArticlesFailure(error);
-    const newState = articlesReducer(prevState, action);
-    expect(newState.loading).to.be.false;
-    expect(newState.error).to.eql(error);
-    expect(newState.data).to.eql([]);
+
+  describe('fetchArticle', () => {
+    it('handles FETCH_ONE_ARTICLE_REQUEST', () => {
+      const prevState = getInitialState();
+      const action = actionCreators.fetchOneArticleRequest();
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(true);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(null);
+    });
+    it('handles FETCH_ONE_ARTICLE_SUCCESS', () => {
+      const data = [3,6,9,12];
+      const prevState = getInitialState();
+      const action = actionCreators.fetchOneArticleSuccess(data);
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql(data);
+      expect(newState.error).to.equal(null);
+    });
+    it('should not mutate previous state', () => {
+      const data = [3,6,9,12];
+      const prevState = getInitialState();
+      const action = actionCreators.fetchOneArticleSuccess(data);
+      const newState = articlesReducer(prevState, action);
+      expect(newState).to.not.equal(prevState);
+      expect(newState.data).to.not.equal(prevState.data);
+    });
+    it('handles FETCH_ONE_ARTICLE_FAILURE', () => {
+      const err = 'something went wrong';
+      const prevState = getInitialState();
+      const action = actionCreators.fetchOneArticleFailure(err);
+      const newState = articlesReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(err);
+    });
   });
 });

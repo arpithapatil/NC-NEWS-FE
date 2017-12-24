@@ -17,6 +17,21 @@ export const fetchArticlesFailure = (error) => ({
   payload: error
 });
 
+export const fetchOneArticleRequest = () => ({
+  type: types.FETCH_ONE_ARTICLE_REQUEST
+});
+
+export const fetchOneArticleSuccess = (data) => ({
+  type: types.FETCH_ONE_ARTICLE_SUCCESS,
+  payload: data
+});
+
+export const fetchOneArticleFailure = (error) => ({
+  type: types.FETCH_ONE_ARTICLE_FAILURE,
+  payload: error
+});
+
+
 export const fetchArticles = () => {
   return (dispatch) => {
     dispatch(fetchArticlesRequest());
@@ -39,6 +54,20 @@ export const fetchArticlesByTopic = (topic) => {
       })
       .catch((error) => {
         dispatch(fetchArticlesFailure(error.message));
+      });
+  };
+};
+
+
+export const fetchArticleById = (id) => {
+  return (dispatch) => {
+    dispatch(fetchOneArticleRequest());
+    return axios.get(`${API_URL}/articles/${id}`)
+      .then((res) => {
+        dispatch(fetchOneArticleSuccess(res.data));
+      })
+      .catch((error) => {
+        dispatch(fetchOneArticleFailure(error.message));
       });
   };
 };

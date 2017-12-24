@@ -1,32 +1,52 @@
 import * as types from '../types';
 
-export const initialState = {
+export const getInitialState = () => ({
   loading: false,
-  error: null,
-  data: []
-};
+  data: [],
+  error: null
+});
 
-export default (prevState = initialState, action) => {
+export default (prevState = getInitialState(), action) => {
   switch (action.type) {
   case types.FETCH_ARTICLES_REQUEST:
     return Object.assign({}, prevState, {
-      loading: !prevState.loading,
-      error: null,
-      data: []
+      loading: true,
+      data: [],
+      error: null
     });
   case types.FETCH_ARTICLES_SUCCESS:
     return Object.assign({}, prevState, {
       loading: false,
-      error: null,
-      data: action.payload
+      data: action.payload,
+      error: null
     });
   case types.FETCH_ARTICLES_FAILURE:
     return Object.assign({}, prevState, {
       loading: false,
-      error: action.payload,
-      data: []
+      data: [],
+      error: action.payload
+    });
+  case types.FETCH_ONE_ARTICLE_REQUEST:
+    return Object.assign({}, prevState, {
+      loading: true,
+      data: [],
+      error: null
+    });
+  case types.FETCH_ONE_ARTICLE_SUCCESS:
+    return Object.assign({}, prevState, {
+      loading: false,
+      data: action.payload,
+      error: null
+    });
+  case types.FETCH_ONE_ARTICLE_FAILURE:
+    return Object.assign({}, prevState, {
+      loading: false,
+      data: [],
+      error: action.payload
     });
   default:
     return prevState;
   }
 };
+  
+
