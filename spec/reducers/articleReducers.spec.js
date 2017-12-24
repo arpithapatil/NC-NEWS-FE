@@ -27,7 +27,7 @@ describe('articleReducer', () => {
       expect(newState.error).to.equal(null);
     });
     it('handles FETCH_ARTICLES_SUCCESS', () => {
-      const data = [3,6,9,12];
+      const data = [8,3,5];
       const prevState = getInitialState();
       const action = actionCreators.fetchArticlesSuccess(data);
       const newState = articlesReducer(prevState, action);
@@ -36,7 +36,7 @@ describe('articleReducer', () => {
       expect(newState.error).to.equal(null);
     });
     it('should not mutate previous state', () => {
-      const data = [3,6,9,12];
+      const data = [5,6,7];
       const prevState = getInitialState();
       const action = actionCreators.fetchArticlesSuccess(data);
       const newState = articlesReducer(prevState, action);
@@ -64,7 +64,7 @@ describe('articleReducer', () => {
       expect(newState.error).to.equal(null);
     });
     it('handles FETCH_ONE_ARTICLE_SUCCESS', () => {
-      const data = [3,6,9,12];
+      const data = [5,6,8];
       const prevState = getInitialState();
       const action = actionCreators.fetchOneArticleSuccess(data);
       const newState = articlesReducer(prevState, action);
@@ -73,7 +73,7 @@ describe('articleReducer', () => {
       expect(newState.error).to.equal(null);
     });
     it('should not mutate previous state', () => {
-      const data = [3,6,9,12];
+      const data = [4,6,7];
       const prevState = getInitialState();
       const action = actionCreators.fetchOneArticleSuccess(data);
       const newState = articlesReducer(prevState, action);
@@ -91,3 +91,41 @@ describe('articleReducer', () => {
     });
   });
 });
+
+describe('putVote', () => {
+  it('handles VOTE_ARTICLE_REQUEST', () => {
+    const prevState = getInitialState();
+    const action = actionCreators.voteArticleRequest();
+    const newState = articlesReducer(prevState, action);
+    expect(newState.loading).to.equal(true);
+    expect(newState.data).to.eql([]);
+    expect(newState.error).to.equal(null);
+  });
+  it('handles VOTE_ARTICLE_SUCCESS', () => {
+    const data = [4,5,6];
+    const prevState = getInitialState();
+    const action = actionCreators.voteArticleSuccess(data);
+    const newState = articlesReducer(prevState, action);
+    expect(newState.loading).to.equal(false);
+    expect(newState.data).to.eql(data);
+    expect(newState.error).to.equal(null);
+  });
+  it('should not mutate previous state', () => {
+    const data = [9,4,5];
+    const prevState = getInitialState();
+    const action = actionCreators.voteArticleSuccess(data);
+    const newState = articlesReducer(prevState, action);
+    expect(newState).to.not.equal(prevState);
+    expect(newState.data).to.not.equal(prevState.data);
+  });
+  it('handles VOTE_ARTICLE_FAILURE', () => {
+    const err = 'something went wrong';
+    const prevState = getInitialState();
+    const action = actionCreators.voteArticleFailure(err);
+    const newState = articlesReducer(prevState, action);
+    expect(newState.loading).to.equal(false);
+    expect(newState.data).to.eql([]);
+    expect(newState.error).to.equal(err);
+  });
+});
+

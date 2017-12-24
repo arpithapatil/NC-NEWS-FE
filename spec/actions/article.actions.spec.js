@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import {fetchArticles, fetchArticlesByTopic,fetchArticlesRequest,fetchArticlesSuccess, fetchArticlesFailure, fetchOneArticleRequest, fetchOneArticleSuccess, fetchOneArticleFailure,
-  fetchArticleById
+  fetchArticleById, putVote, voteArticleFailure, voteArticleSuccess, voteArticleRequest
 } from '../../src/actions/article';
 
 import  {API_URL} from '../../config';
@@ -127,6 +127,51 @@ describe('fetchArticlesById', () => {
 
     const store = mockStore();
     return store.dispatch(fetchArticleById(article_id))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+  });
+});
+
+describe('putVote', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+  it('dispatches VOTE_ARTICLE_SUCCESS and responds with status code 200 and article', () => {
+    const article_id = '5a13f64ad7681349fcb82bb1';
+    const input = 'up';
+    const item = 'article';
+    nock(API_URL)
+      .put(`/articles/${article_id}?vote=${input}`)
+      .reply(200, ['article']);
+    
+    const expectedActions = [
+      voteArticleRequest(),
+      voteArticleSuccess(['article'])
+    ];
+
+    const store = mockStore();
+    return store.dispatch(putVote(input, article_id, item))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+  });
+  it('dispatches VOTE_ARTICLE_FAILURE when responds with an error', () => {
+    const error = 'Invalid article ID';
+    const article_id = '123';
+    const input = 'up';
+    const item = 'article';
+    nock(API_URL)
+      .put(`/articles/${article_id}?vote=${input}`)
+      .replyWithError({'message': error});
+    
+    const expectedActions = [
+      voteArticleRequest(),
+      voteArticleFailure(error)
+    ];
+
+    const store = mockStore();
+    return store.dispatch(putVote(input, article_id, item))
       .then(() => {
         expect(store.getActions()).to.eql(expectedActions);
       });

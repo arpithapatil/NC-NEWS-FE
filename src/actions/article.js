@@ -31,6 +31,20 @@ export const fetchOneArticleFailure = (error) => ({
   payload: error
 });
 
+export const voteArticleRequest = () => ({
+  type: types.VOTE_ARTICLES_REQUEST
+});
+  
+export const voteArticleSuccess = (data) => ({
+  type: types.VOTE_ARTICLES_SUCCESS,
+  payload: data
+});
+
+export const voteArticleFailure = (error) => ({
+  type: types.VOTE_ARTICLES_FAILURE,
+  payload: error
+});
+
 
 export const fetchArticles = () => {
   return (dispatch) => {
@@ -70,4 +84,21 @@ export const fetchArticleById = (id) => {
         dispatch(fetchOneArticleFailure(error.message));
       });
   };
+};
+
+export const putVote = (input, id, item) => {
+  let category;
+  if (item === 'article') {
+    category = 'articles';
+    return (dispatch) => {
+      dispatch(voteArticleRequest());
+      return axios.put(`${API_URL}/${category}/${id}?vote=${input}`)
+        .then((res) => {
+          dispatch(voteArticleSuccess(res.data));
+        })
+        .catch((error) => {
+          dispatch(voteArticleFailure(error.message));
+        });
+    };
+  }  
 };
