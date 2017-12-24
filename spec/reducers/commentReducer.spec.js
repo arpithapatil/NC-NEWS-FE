@@ -3,7 +3,7 @@ import commentsReducer, {getInitialState} from '../../src/reducers/commentReduce
 import *  as actionCreators from '../../src/actions/comment';
 
 describe('comments reducer', () => {
-  const topic = 'football';
+  const topic = 'coding';
   describe('default behaviour', () => {
     it('returns the passed previous state if an unrecognised action is passed', () => {
       const prevState = getInitialState();  
@@ -87,6 +87,43 @@ describe('comments reducer', () => {
       const error = 'something went wrong';
       const prevState = getInitialState();
       const action = actionCreators.postCommentFailure(error);
+      const newState = commentsReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(error);
+    });
+  });
+
+  describe('putVote', () => {
+    it('handles VOTE_COMMENT_REQUEST', () => {
+      const prevState = getInitialState();
+      const action = actionCreators.voteCommentRequest();
+      const newState = commentsReducer(prevState, action);
+      expect(newState.loading).to.equal(true);
+      expect(newState.data).to.eql([]);
+      expect(newState.error).to.equal(null);
+    });
+    it('handles VOTE_COMMENT_SUCCESS', () => {
+      const data = [1,2,3];
+      const prevState = getInitialState();
+      const action = actionCreators.voteCommentSuccess(data);
+      const newState = commentsReducer(prevState, action);
+      expect(newState.loading).to.equal(false);
+      expect(newState.data).to.eql(data);
+      expect(newState.error).to.equal(null);
+    });
+    it('should not mutate previous state', () => {
+      const data = [1,2,3];
+      const prevState = getInitialState();
+      const action = actionCreators.voteCommentSuccess(data);
+      const newState = commentsReducer(prevState, action);
+      expect(newState).to.not.equal(prevState);
+      expect(newState.data).to.not.equal(prevState.data);
+    });
+    it('handles VOTE_COMMENT_FAILURE', () => {
+      const error = 'something went wrong';
+      const prevState = getInitialState();
+      const action = actionCreators.voteCommentFailure(error);
       const newState = commentsReducer(prevState, action);
       expect(newState.loading).to.equal(false);
       expect(newState.data).to.eql([]);

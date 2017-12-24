@@ -31,6 +31,20 @@ export const postCommentFailure = (error) => ({
   payload: error
 });
 
+export const voteCommentRequest = () => ({
+  type: types.VOTE_COMMENTS_REQUEST
+});
+  
+export const voteCommentSuccess = (data) => ({
+  type: types.VOTE_COMMENTS_SUCCESS,
+  payload: data
+});
+  
+export const voteCommentFailure = (error) => ({
+  type: types.VOTE_COMMENTS_FAILURE,
+  payload: error
+});
+
 
 export const fetchComments = (id) => {
   return (dispatch) => {
@@ -71,4 +85,27 @@ export const postComment = (id, comment) => {
         dispatch(postCommentFailure(error.message));
       });
   };
+
+};
+
+export const putVote = (input, id, item, article_id) => {
+  let category;
+  if (item === 'comment') {
+    category = 'comments';
+    return (dispatch) => {
+      dispatch(voteCommentRequest());
+      return axios.put(`${API_URL}/${category}/${id}?vote=${input}`, {'article_id': article_id})
+        .then((res) => {
+          return res.data.sort((a, b) => {
+            return b.created_at - a.created_at;
+          });
+        })
+        .then((sortedComments) => {
+          dispatch(voteCommentSuccess(sortedComments));
+        })
+        .catch((error) => {
+          dispatch(voteCommentFailure(error.message));
+        });
+    };
+  }
 };
