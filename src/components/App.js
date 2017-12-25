@@ -19,10 +19,10 @@ class App extends React.Component {
           <div>
             <Switch>
               <Route exact path='/' component= {Homepage}/>
-              <Route path='/topics/:topic/articles' component= {ArticleList}/>
+              <Route path='/topics/:topic_id/articles' component= {ArticleList}/>
               <Route path='/articles' component= {ArticleList}/>
-              <Route path='/articles/:article' component= {ArticleItem}/>
-              <Route path='/articles/:article/comments' component= {Comments}/>
+              <Route path='/articles/:article_id' component= {ArticleItem}/>
+              <Route path='/articles/:article_id/comments' component= {Comments}/>
               <Route component= {NoMatch}/>
             </Switch>
           </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {getMostPopular} from '../actions/article';
+import {NavLink} from 'react-router-dom';
 import PT from 'prop-types';
-import {fetchArticles} from '../actions/article';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -9,30 +10,28 @@ class Homepage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchArticles();
+    this.props.getMostPopular();
   }
-
   render () {
     return (
       <div>
         <h1>Northcoders News</h1>
-        {/* <h3>Most Popular Stories</h3> */}
-        <div className='all-articles'>
-          <h1>Home</h1>
-         
-          {this.props.articles.map((article) => {
-             
+        <div className='get-articles'>
+          <h2>Most Popular Stories</h2>
+          {this.props.articles.map((article, i) => {
             const topic = article.belongs_to;
-            
-            return (
-              <div key={article.title}>
-                <p>{article.title}</p>
-                <p>{topic}</p>
-                <p>{article.votes}</p>
-                <p>{article.comments}</p>
-              </div>
-            );
-          })}
+            while (i < 10) {
+              return (
+                <div key={article.title}>
+                  <p><NavLink to={`/articles/${article._id}`}>{article.title}</NavLink></p>
+                  <p><NavLink to={`/topics/${topic}/articles`}>{topic}</NavLink></p>
+                  <p>{article.votes}</p>
+                  <p><NavLink to={`/articles/${article._id}/comments`}>{article.comments}</NavLink></p>
+                </div>
+              );
+            }
+          }
+          )}
         </div>
       </div>
     );
@@ -46,15 +45,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchArticles: () => {
-    dispatch(fetchArticles());
+  getMostPopular: () => {
+    dispatch(getMostPopular());
   }
 });
 
 Homepage.propTypes = {
   articles: PT.array.isRequired,
   error: PT.any,
-  fetchArticles: PT.func.isRequired
+  getMostPopular: PT.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
