@@ -1,12 +1,21 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'; 
+import Homepage from './HomePage';
+import NoMatch from './NoMatch';
 
-class App extends Component {
-  constructor (props) {
-    super(props);
-  }
+class App extends React.Component {
   render () {
     return (
-      <div><h1>This is app component</h1></div>
+      <BrowserRouter>
+        <section>
+          <div>
+            <Switch>
+              <Route exact path='/' component= {Homepage}/>
+              <Route component= {NoMatch}/>
+            </Switch>
+          </div>
+        </section>
+      </BrowserRouter>
     );
   }
 }
