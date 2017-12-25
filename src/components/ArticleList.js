@@ -9,11 +9,15 @@ class ArticleList extends React.Component {
     const topic = this.props.match.params.topic;
     this.props.fetchArticlesByTopic(topic);
   }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.match.params.topic !== this.props.match.params.topic) {
+      this.props.fetchArticlesByTopic(nextProps.match.params.topic);
+    }
+  }
 
   render () {
     return (
       <div>
-        <h1>Northcoders News</h1>
         <div className='topic-articles'>
           <h2>Articles</h2>
           {this.props.articles.map((article) => {
@@ -37,7 +41,6 @@ const mapStateToProps = state => ({
   articles: state.articles.data,
   loading: state.articles.loading,
   error: state.articles.error
-
 });
 
 const mapDispatchToProps = dispatch => ({

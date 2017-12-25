@@ -15,16 +15,15 @@ class Homepage extends React.Component {
   render () {
     return (
       <div>
-        <h1>Northcoders News</h1>
-        <div className='get-articles'>
+        <div className='pop-articles'>
           <h2>Most Popular Stories</h2>
           {this.props.articles.map((article, i) => {
             const topic = article.belongs_to;
-            while (i < 10) {
+            while (i < 6) {
               return (
                 <div key={article.title}>
                   <p><NavLink to={`/articles/${article._id}`}>{article.title}</NavLink></p>
-                  <p><NavLink to={`/topics/${topic}/articles`}>{topic}</NavLink></p>
+                  <p><NavLink to={`/${topic}`}>{topic}</NavLink></p>
                   <p>{article.votes}</p>
                   <p><NavLink to={`/articles/${article._id}/comments`}>{article.comments}</NavLink></p>
                 </div>

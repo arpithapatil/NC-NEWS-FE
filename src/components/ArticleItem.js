@@ -13,13 +13,12 @@ class ArticleItem extends React.Component {
   render () {
     return (
       <div>
-        <h1>Northcoders News</h1>
         <div className='article-item'>
           <p>{this.props.articles.title}</p>
           <p>{this.props.articles.belongs_to}</p>
           <p>{this.props.articles.body}</p>
           <p>{this.props.articles.votes}</p>
-          <p><NavLink to={`/articles/${this.props.articles._id}/comments`}>{this.props.articles.comments}</NavLink></p>
+          <p><NavLink to={`/articles/${this.props.articles._id}/comments`}>{this.props.articles.comments} Comments</NavLink></p>
         </div>
       </div>
     );
@@ -29,7 +28,7 @@ class ArticleItem extends React.Component {
 const mapStateToProps = state => ({
   articles: state.articles.data[0],
   loading: state.articles.loading,
-  error: state.articles.error
+  error: state.articles.error,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,7 +36,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchArticleById(id));
   }
 });
-
 ArticleItem.propTypes = {
   articles: PT.array.isRequired,
   error: PT.any,
