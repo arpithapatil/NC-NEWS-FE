@@ -131,3 +131,40 @@ describe('comments reducer', () => {
     });
   });
 });
+
+describe('removeComment actions', () => {
+  it('handles REMOVE_COMMENTS_REQUEST', () => {
+    const prevState = getInitialState();
+    const action = actionCreators.removeCommentRequest();
+    const newState = commentsReducer(prevState, action);
+    expect(newState.loading).to.equal(true);
+    expect(newState.data).to.eql([]);
+    expect(newState.error).to.equal(null);
+  });
+  it('handles REMOVE_COMMENTS_SUCCESS', () => {
+    const data = [1,2,3];
+    const prevState = getInitialState();
+    const action = actionCreators.removeCommentSuccess(data);
+    const newState = commentsReducer(prevState, action);
+    expect(newState.loading).to.equal(false);
+    expect(newState.data).to.eql(data);
+    expect(newState.error).to.equal(null);
+  });
+  it('should not mutate previous state', () => {
+    const data = [1,2,3];
+    const prevState = getInitialState();
+    const action = actionCreators.removeCommentSuccess(data);
+    const newState = commentsReducer(prevState, action);
+    expect(newState).to.not.equal(prevState);
+    expect(newState.data).to.not.equal(prevState.data);
+  });
+  it('handles REMOVE_COMMENTS_FAILURE', () => {
+    const err = 'something went wrong';
+    const prevState = getInitialState();
+    const action = actionCreators.removeCommentFailure(err);
+    const newState = commentsReducer(prevState, action);
+    expect(newState.loading).to.equal(false);
+    expect(newState.data).to.eql([]);
+    expect(newState.error).to.equal(err);
+  });
+});

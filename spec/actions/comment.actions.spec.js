@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import {fetchComments,fetchCommentsRequest, fetchCommentsSuccess, fetchCommentsFailure, postCommentFailure, postCommentSuccess, postCommentRequest,
-  postComment, putVote, voteCommentFailure, voteCommentRequest, voteCommentSuccess}  from '../../src/actions/comment';
+  postComment, putVote, voteCommentFailure, voteCommentRequest, voteCommentSuccess, removeComment, removeCommentFailure, removeCommentRequest, removeCommentSuccess}  from '../../src/actions/comment';
 
 import {API_URL} from '../../config';
 
@@ -142,5 +142,46 @@ describe('Comment actions', () => {
           expect(store.getActions()).to.eql(expectedActions);
         });
     });
+  });
+});
+
+describe('removeComment', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+  it('dispatches REMOVE_COMMENTS_SUCCESS and responds with status code 200 and comment', () => {
+    const comment_id = '5a13f64ed7681349fcb82c43';
+    nock(API_URL)
+      .delete(`/comments/${comment_id}`)
+      .reply(200, []);
+      
+    const expectedActions = [
+      removeCommentRequest(),
+      removeCommentSuccess([])
+    ];
+  
+    const store = mockStore();
+    return store.dispatch(removeComment(comment_id))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+  });
+  it('dispatches REMOTE_COMMENTS_FAILURE when responds with an error', () => {
+    const error = 'Invalid comment ID';
+    const comment_id = '123';
+    nock(API_URL)
+      .delete(`/comments/${comment_id}`)
+      .replyWithError({'message': error});
+      
+    const expectedActions = [
+      removeCommentRequest(),
+      removeCommentFailure(error)
+    ];
+  
+    const store = mockStore();
+    return store.dispatch(removeComment(comment_id))
+      .then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
   });
 });

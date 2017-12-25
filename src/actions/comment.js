@@ -45,6 +45,19 @@ export const voteCommentFailure = (error) => ({
   payload: error
 });
 
+export const removeCommentRequest = () => ({
+  type: types.REMOVE_COMMENTS_REQUEST
+});
+  
+export const removeCommentSuccess = (data) => ({
+  type: types.REMOVE_COMMENTS_SUCCESS,
+  payload: data
+});
+export const removeCommentFailure = (error) => ({
+  type: types.REMOVE_COMMENTS_FAILURE,
+  payload: error
+});
+
 
 export const fetchComments = (id) => {
   return (dispatch) => {
@@ -108,4 +121,23 @@ export const putVote = (input, id, item, article_id) => {
         });
     };
   }
+};
+
+export const removeComment = (id, article_id) => {
+  return (dispatch) => {
+    dispatch(removeCommentRequest());
+    return axios.delete(`${API_URL}/comments/${id}`, {params: {'article_id': article_id
+    }})
+      .then((res) => {
+        return res.data.sort((a, b) => {
+          return b.created_at - a.created_at;
+        });
+      })
+      .then((sortedComments) => {
+        dispatch(removeCommentSuccess(sortedComments));
+      })
+      .catch((error) => {
+        dispatch(removeCommentFailure(error.message));
+      });
+  };
 };

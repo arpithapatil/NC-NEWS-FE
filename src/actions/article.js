@@ -102,3 +102,21 @@ export const putVote = (input, id, item) => {
     };
   }  
 };
+
+export const getMostPopular = () => {
+  return (dispatch) => {
+    dispatch(fetchArticlesRequest());
+    return axios.get(`${API_URL}/articles`)
+      .then((res) => {
+        return res.data.sort((a, b) => {
+          return b.votes - a.votes;
+        });
+      })
+      .then((result) => {
+        dispatch(fetchArticlesSuccess(result));
+      })
+      .catch((error) => {
+        dispatch(fetchArticlesFailure(error.message));
+      });
+  };
+};
