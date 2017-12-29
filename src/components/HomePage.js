@@ -4,7 +4,7 @@ import {getMostPopular} from '../actions/article';
 import {NavLink} from 'react-router-dom';
 import PT from 'prop-types';
 
-class Homepage extends React.Component {
+export class Homepage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -14,23 +14,41 @@ class Homepage extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className='main container-fluid'>
         <div className='pop-articles'>
           <h2>Most Popular Stories</h2>
-          {this.props.articles.map((article, i) => {
-            const topic = article.belongs_to;
-            while (i < 6) {
-              return (
-                <div key={article.title}>
-                  <p><NavLink to={`/articles/${article._id}`}>{article.title}</NavLink></p>
-                  <p><NavLink to={`/${topic}`}>{topic}</NavLink></p>
-                  <p>{article.votes}</p>
-                  <p><NavLink to={`/articles/${article._id}/comments`}>{article.comments}</NavLink></p>
-                </div>
-              );
+          <div className='row'>
+            {this.props.articles.map((article, i) => {
+              const title = article.title.split(' ').map((word) => {
+                return word[0].toUpperCase() + word.slice(1).toLowerCase();
+              }).join(' ');
+              while (i < 12) {
+                return (
+                  <div key={article.title} className='col-xs-12 col-md-4 articles '>
+                    <h4><NavLink to={`/articles/${article._id}`}>{title}<br/></NavLink></h4>
+                    {(() => {
+                      if (article.title.length < 50) {
+                        return (
+                          <br/>  
+                        );
+                      }
+                    })()}
+                    <div className='row article-details'>
+                      <div className='col-md-4 comments'>
+                        <p className='col-md-4'><NavLink to={`/articles/${article._id}/comments`}>{article.comments}<br/>comments</NavLink></p>
+                      </div>
+                      <div className='col-md-4 votes'>
+                        <img className='thumb' src='https://image.freepik.com/free-icon/thumbs-up-hand-symbol_318-41939.jpg' alt='votes' />
+                        <p className='col-md-4'>{article.votes}</p>
+                      </div> 
+                    </div>
+                  </div>
+                );
+              }
             }
-          }
-          )}
+          
+            )}
+          </div>
         </div>
       </div>
     );
