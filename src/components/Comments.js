@@ -1,78 +1,140 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchComments, postComment, putVote} from '../actions/comment';
+import {fetchComments, postComment, removeComment} from '../actions/comment';
 import PT from 'prop-types';
-
+import Loading from './Load';
+import CommentCard from './CommentCard';
 
 class Comments extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
-      comment: ''
+      comment: '',
+      loadingFlag: false,
+      commentList: this.props.comments
     };
-    this.voteClickHandler = this.voteClickHandler.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.removeHandler = this.removeHandler.bind(this);
   }
-  componentDidMount() {
-    const id = this.props.article_id;
+  componentDidMount () {
+    let id; 
+    if (this.props.article_id) {
+      id = this.props.article_id;
+    }
+    else id = this.props.match.params.article_id;
     this.props.fetchComments(id);
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.comments.length !== this.props.comments.length) {
-      this.props.fetchComments(this.props.article_id);
+      this.setState({
+        loadingFlag: false
+      });
+    }
+  }
+  render () {
+    let comments;
+    if (this.state.loadingFlag) {
+      comments = this.state.commentList;
+    }
+    else {
+      comments = this.props.comments;
+    }
+    if (comments.length) {
+      return (
+        <div className='main container-fluid'>  
+          <div>
+            <div className = "comment-form">
+              <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Type your comment here..."></input>
+              <input className='submit-form' onClick={this.submitHandler} type='submit' value="Submit"></input>
+            </div>
+            {comments.map((comment) => {
+              return (
+                <CommentCard 
+                  key={comment.created_at}
+                  loading = {this.props.loading}
+                  comment = {comment}
+                  article_id = {comment.belongs_to}
+                  removeHandler = {this.removeHandler}
+                />
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+    else {
+      if (!this.props.loading) {
+        return (
+          <div className='main container-fluid'>  
+            <div>
+              <div className = "comment-form">
+                <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Type your comment here..."></input>
+                <input className='submit-form' onClick={this.submitHandler} type='submit' value="Submit"></input>
+              </div>
+            </div>
+          </div>
+        );
+      }
+      else {
+        return (
+          <Loading />
+        );
+      }
     }
   }
 
-  voteClickHandler(event) {
-    event.preventDefault();
-    const category = 'comment';
-    const id = event.target.id;
-    const input = event.target.name;
-    this.props.putVote(input, id, category);
-  }
-  changeHandler(event) {
-    event.preventDefault();
-    const input = event.target.value;
+  changeHandler (e) {
     this.setState({
-      comment: input
+      comment: e.target.value
     });
   }
-  submitHandler(event) {
-    event.preventDefault();
-    const id = this.props.article_id;
+  submitHandler (e) {
+    e.preventDefault();
+    let article_id;
+    if (this.props.article_id) {
+      article_id = this.props.article_id;
+    }
+    else article_id = this.props.match.params.article_id;
     const comment = this.state.comment;
-    this.props.postComment(id, comment);
+
+    const newComment = [{
+      body: comment,
+      belongs_to: article_id,
+      created_by: 'northcoder',
+      votes: 0,
+      created_at: Date.now()
+    }];
+    const prevComments = this.props.comments;
+    const newComments = newComment.concat(prevComments);
+    this.setState({
+      commentList: newComments,
+      loadingFlag: true
+    });
+
+    this.props.postComment(article_id, comment);
+    this.setState({
+      comment: ''
+    });
   }
   
-  render () {
-    return (
-      <div className='main container-fluid'>  
-        <div>
-          {this.props.comments.map((comment) => {
-            return (
-              <div key={comment.created_at} className='comment-item'>
-                <p>{comment.created_at}</p>
-                <p className='comment-body'>{comment.body}</p>
-                <p className='comment-author'>By {comment.created_by}</p>
-                <div className='votes'>
-                  <p>{comment.votes}</p>  
-                  <input type="image" src="https://image.freepik.com/free-icon/thumbs-up-hand-symbol_318-41939.jpg" name="up" onClick={this.voteClickHandler} className="butTxt submit" id={comment._id} />
-                  <input type="image" src="https://image.freepik.com/free-icon/thumbs-down-silhouette_318-41911.jpg" name="down" onClick={this.voteClickHandler} className="butTxt submit" id={comment._id} />
-                </div>
-              </div>
-            );
-          })}
-          <div className = "comment-form">
-            <form>
-              <input onChange={this.changeHandler} type='text' placeholder="Type your comment here..."></input>
-              <br></br>
-              <input onClick={this.submitHandler} type='submit' value="Submit"></input>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
+  removeHandler (e) {
+    e.preventDefault();
+    const id = e.target.id;
+    const article_id = e.target.name;
+
+    const prevComments = this.props.comments;
+    let index;
+    prevComments.map((comment, i) => {
+      if (comment._id === id) index = i;
+    });
+    const newComments = prevComments.slice(0,index).concat(prevComments.slice(index + 1));
+  
+    this.setState({
+      commentList: newComments,
+      loadingFlag: true
+    });
+    this.props.removeComment(id, article_id);      
   }
 }
   
@@ -86,21 +148,22 @@ const mapDispatchToProps = dispatch => ({
   fetchComments: (id) => {
     dispatch(fetchComments(id));
   },
-  changeVote: (input, id, category) => {
-    dispatch(putVote(input, id, category));
+  postComment: (article_id, comment) => {
+    dispatch(postComment(article_id, comment));
   },
-  addComment: (id, comment) => {
-    dispatch(postComment(id, comment));
+  removeComment: (id, article_id) => {
+    dispatch(removeComment(id, article_id));
   }
 });
 
 Comments.propTypes = {
   comments: PT.array.isRequired,
+  loading: PT.bool.isRequired,
   error: PT.any,
-  article_id:PT.string.isRequired,
   fetchComments: PT.func.isRequired,
-  putVote: PT.func.isRequired,
   postComment: PT.func.isRequired,
+  removeComment: PT.func.isRequired,
+  article_id: PT.string.isRequired,
   match: PT.any.isRequired
 };
 

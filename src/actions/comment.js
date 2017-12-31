@@ -77,14 +77,14 @@ export const fetchComments = (id) => {
   };
 };
 
-export const postComment = (id, comment) => {
+export const postComment = (article_id, comment) => {
   return (dispatch) => {
     dispatch(postCommentRequest());
-    return axios.post(`${API_URL}/articles/${id}/comments`, {'comment': comment})
+    return axios.post(`${API_URL}/articles/${article_id}/comments`, {'comment': comment})
       .then((res) => {
         if (res.data.length > 1) {
           return res.data.filter((comment) => {
-            return comment.belongs_to === id; 
+            return comment.belongs_to === article_id; 
           }).sort((a, b) => {
             return b.created_at - a.created_at;
           });

@@ -16,7 +16,7 @@ const NavBar = () => {
             {topics.map((topic) => {
               return (
                 <li key={topic}>
-                  <NavLink to={`/${topic}`} data-toggle="collapse" data-target=".navbar-collapse.in">{topic}</NavLink>
+                  <h4><NavLink to={`/${topic}`} className='nav-topic'>{topic}</NavLink></h4>
                 </li>
               );
             })}

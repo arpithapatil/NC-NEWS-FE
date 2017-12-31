@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <section>
-          <div>
+          <div className='body'>
             <NavBar/>
             <Switch>
               <Route exact path='/' component= {HomePage}/>
