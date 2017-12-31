@@ -106,6 +106,15 @@ margin-top:0px;
 width: 1.3em; 
 
 }
+.vote-btn1c{
+    margin-top: 0px;
+    width: 1em;
+}
+.vote-btn2c{
+margin-top:0px;
+width: 1em; 
+
+}
 .vote-btn1:hover {
     width: 2.2em;
 }
@@ -113,10 +122,23 @@ width: 1.3em;
     width: 2.2em;
 }
 
+.vote-btn1c:hover {
+    width: 2em;
+}
+.vote-btn2c:hover {
+    width: 2em;
+}
 .vote-count{
     margin-left: -30px;
     margin-top:10px; 
     font-size: 1.2em;
+    align-items: center;
+    color: rgb(255, 0, 85);
+
+}
+.vote-countc{
+  
+    font-size: 1em;
     align-items: center;
     color: rgb(255, 0, 85);
 
@@ -160,17 +182,6 @@ a:active {
 .art-bod{
     margin-left: (spacer * .25) !important;
 }
-/* 
-.article-item {
-    color: #000;
-    background-color: white;
-    border-radius: 15px;
-    border: 2px lightgray solid; 
-    font-size: 1.5em;
-    box-shadow: 3px 6px 3px lightgray;
-    margin-left: 150px;
-    margin-right: 150px;
-} */
 
 .article-item {
     background-color: white; 
@@ -212,8 +223,8 @@ a:active {
 }
 
 .votes {
-    height: 100px;
-    margin-top: -10px;
+    float:left;
+  
 }
 
 
@@ -227,13 +238,15 @@ a:active {
     margin: 0;
 }
 .comment-item {
-    background-color: rgba(255, 255, 255, 0.509); 
+    background-color: white; 
     color: black;
-    border: solid white 5px;
-    border-radius: 20px;
+    border: solid lightgray ;
+    border-radius: 5px;
     padding: 20px 30px 0 30px;
-    font-size: 1em;
-    margin-top: 10px;   
+    font-size: 1.5em;
+    margin-top: 10px; 
+    box-shadow: 2px 5px 2px lightgray;
+    font-family: 'Alegreya Sans', sans-serif;  
 }
 .comment-p {
     background: none;
@@ -247,9 +260,11 @@ button {
     outline: none;
 }
 .comment-author {
+    padding-bottom: 0px;
     text-align: left;
     font-style: italic;
-    margin-top: 10px;
+    color: rgb(255, 0, 85);
+    padding:5px 10px;
 }
 .comment-component {
     background-color: rgba(255, 255, 255, 0.509); 
@@ -261,11 +276,12 @@ button {
     margin: 20px;
 }
 .comment-form {
-    background-color: rgba(255, 255, 255, 0.509); 
+    background-color:white; 
     color: black;
-    border: solid white 5px;
-    border-radius: 20px;
+    border: solid lightgray  ;
+    border-radius: 5px;
     padding: 10px 10px 0 10px;
+    box-shadow: 2px 5px 2px lightgray;
     margin-top: 10px;
 }
 
@@ -277,21 +293,27 @@ button {
     padding: 10px;
 }
 .comment-form .submit-form {
-    border-radius: 10px;
-    background-color: black;
+    border-radius: 5px;
+    background:rgb(255, 0, 85);
     border: none;
-    color: rgb(209, 250, 240);
+    color: white;
     margin: 10px;
+    margin-left:0px; 
+    font-size: 1.3em;
+    font-family: 'Alegreya Sans', sans-serif; 
 }
 .comment-rmv-btn {
-    background-color: black;
-    border: none;
-    color: rgb(209, 250, 240);
+    background-color:lightgray;
+    color: black;
     float: right;
     padding: 5px, 10px;
+    font-family: 'Alegreya Sans', sans-serif;  
 }
 .comment-date {
     float: left;
+    color: black ;
+    font-weight: bold;
+    
 }
 
 .comment-body {

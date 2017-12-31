@@ -88,11 +88,11 @@ class ArticleItem extends React.Component {
             {(() => {
               if (this.state.commentFlag || this.props.commentflag === 'true') {
                 return (
-                  <button className='comment-p' onClick={this.hideComments}>hide comments</button>   
+                  <button className='comment-p' onClick={this.hideComments}>Hide comments</button>   
                 );
               }
               else return (
-                <button className='comment-p' onClick={this.showComments}>show comments</button>   
+                <button className='comment-p' onClick={this.showComments}>Show comments</button>   
               );
             })()}   
           </div>

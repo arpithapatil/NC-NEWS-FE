@@ -45,8 +45,8 @@ class Comments extends React.Component {
         <div className='main container-fluid'>  
           <div>
             <div className = "comment-form">
-              <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Type your comment here..."></input>
-              <input className='submit-form' onClick={this.submitHandler} type='submit' value="Submit"></input>
+              <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Add a comment....."></input><br/>
+              <input className='submit-form' onClick={this.submitHandler} type='submit' value="Post"></input>
             </div>
             {comments.map((comment) => {
               return (
@@ -69,8 +69,8 @@ class Comments extends React.Component {
           <div className='main container-fluid'>  
             <div>
               <div className = "comment-form">
-                <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Type your comment here..."></input>
-                <input className='submit-form' onClick={this.submitHandler} type='submit' value="Submit"></input>
+                <input value = {this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Add a comment"></input>
+                <input className='submit-form' onClick={this.submitHandler} type='submit' value="Post"></input>
               </div>
             </div>
           </div>
