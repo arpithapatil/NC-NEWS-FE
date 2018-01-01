@@ -9,7 +9,6 @@
     padding-top: 0px; 
    
 }
-
 .nav-title {
     color:black;
     text-decoration: none;
@@ -46,8 +45,6 @@
     font-size: 1.5em;
 
 }
-
-
 .articles {
   
     background-color:white;
@@ -55,7 +52,7 @@
     border:lightgray solid; 
     font-size: 1em;
     box-shadow: 1px 3px 1px lightgray;
-    margin-left: 300px;
+    margin-left: 350px;
     margin-bottom: 15px;
     font-family: 'Alegreya Sans', sans-serif;
 }
@@ -68,10 +65,10 @@
     margin-top: 15px;
 }
 .mostpopular{
+    text-align: center;
     color: rgb(255, 0, 85);
     font-family: 'Alegreya Sans', sans-serif;
 }
-
 
 h4 {
     font-size: 1.5em;
@@ -91,11 +88,12 @@ h4 a {
     
 }
 .arrowup{
-    margin-top:5px; 
-    width:1.5em;
+  width:1.5em;
 }
 .arrowdown{
     width:1.5em;
+    margin-bottom: 15px;
+    
 }
 .vote-btn1{
     margin-top: 0px;
@@ -179,9 +177,6 @@ a:active {
     color: black;
     font-weight: bold;
 }
-.art-bod{
-    margin-left: (spacer * .25) !important;
-}
 
 .article-item {
     background-color: white; 
@@ -190,13 +185,11 @@ a:active {
     border: 2px lightgray solid;
     box-shadow: 3px 6px 3px lightgray;
     padding: 20px 30px;
-    font-size: 1.5em;
+    font-size: 2em;
     text-align: justify;
     margin: 20px;
     font-family: 'Alegreya Sans', sans-serif;
 }
-
-
 
 .article-comments {
     background-color: rgba(255, 255, 255, 0.509); 
@@ -227,7 +220,6 @@ a:active {
   
 }
 
-
 .votes-article-item p{
     padding-left: 20px;
 }
@@ -246,7 +238,8 @@ a:active {
     font-size: 1.5em;
     margin-top: 10px; 
     box-shadow: 2px 5px 2px lightgray;
-    font-family: 'Alegreya Sans', sans-serif;  
+    font-family: 'Alegreya Sans', sans-serif; 
+  
 }
 .comment-p {
     background: none;
@@ -267,13 +260,14 @@ button {
     padding:5px 10px;
 }
 .comment-component {
-    background-color: rgba(255, 255, 255, 0.509); 
+    background-color: white; 
     color: black;
-    border: solid white 5px;
-    border-radius: 20px;
+    border: solid lightgray 3px;
+    border-radius: 10px;
     padding: 20px 10px;
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin: 20px;
+
 }
 .comment-form {
     background-color:white; 
@@ -320,15 +314,10 @@ button {
     padding-top: 10px;
 }
 
-.topic-pic a:hover img{
-    width: 4.5em;
-}
 input {
     outline: none;
 }
-.vote-num {
-    margin-top: 5px;
-}
+
 .return-articles{
 text-align: left;
 padding-left: 0.8em;
@@ -351,4 +340,10 @@ i {
 .left {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
+}
+.topic-articles{
+    text-align: center;
+    color: rgb(255, 0, 85);
+    font-family: 'Alegreya Sans', sans-serif;
+
 }

@@ -42,23 +42,22 @@ class ArticleList extends React.Component {
                 }
                 else return word.toUpperCase();
               }).join(' ');
-
-         
               return (
-                <div key={article.title} className='col-xs-12 col-md-4 articles'>
-                  <div className='row article-title-box'>
-                    <h4><NavLink to={`/articles/${article._id}`}>{title}</NavLink></h4>
-                  </div>
-                  <div className='row article-details'>
-                    <div className='col-md-4 comments'>
-                      <p><NavLink className='comment-link' to={`/articles/${article._id}`}>{article.comments}<br/>comments</NavLink></p> 
-                    </div>
-                    <div className='col-md-4 votes'>
-                      <img className='thumb' src='https://image.freepik.com/free-icon/thumbs-up-hand-symbol_318-41939.jpg' alt='votes' />
-                      <p>{article.votes}</p>
+                <div key={article.title} className='col-xs-12 col-md-8 articles '>
+                  <div className='row'>
+                    <div className='col-md-2 votes'>
+                      <img className='arrowup' src='https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/256x256/plain/arrow_up.png' alt='votes' />
+                      <p className='num'>{article.votes}</p>
+                      <img className='arrowdown' src='https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/arrow_down.png' alt='votes' />
                     </div> 
+                    <div className='col-md-8'>
+                      <h3><NavLink to={`/articles/${article._id}`} className='article-title-box'>{title}<br/></NavLink></h3>
+                    </div>
+                    <div className='col-md-2 comments'>
+                      <p><NavLink className='comment-link' commentflag='true' to={`/articles/${article._id}`}>{article.comments}<br/>comments</NavLink></p> 
+                    </div>  
                   </div>
-                </div>
+                </div>    
               );
             })}
           </div>

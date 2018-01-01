@@ -24,7 +24,7 @@ class App extends React.Component {
               <Route exact path='/articles' component= {ArticleList}/>
               <Route exact path='/articles/:article_id' component= {ArticleItem}/>
               <Route path='/articles/:article_id/comments' component= {Comments}/>
-              <Route component= {NoMatch}/>
+              <Route path='/*' component= {NoMatch}/>
             </Switch>
           </div>
         </section>
