@@ -12,6 +12,22 @@ class CommentCard extends React.Component {
     };
     this.voteClickHandler = this.voteClickHandler.bind(this);
   }
+
+  voteClickHandler (event) {
+    event.preventDefault();
+    const article_id = this.props.article_id;
+    const category = 'comment';
+    const id = event.target.id;
+    const input = event.target.name;
+    const prevVotes = this.props.comment.votes;
+    let newVotes;
+    if (input === 'up') newVotes = prevVotes + 1;
+    else  newVotes = prevVotes - 1;
+    this.setState({
+      votes: newVotes
+    });
+    this.props.putVote(input, id, category, article_id);
+  }
   
   render () {
     const comment = this.props.comment;
@@ -45,30 +61,11 @@ class CommentCard extends React.Component {
           <p className='comment-bod'>{comment.body}</p>
            
           <p className='comment-date'>{moment(comment.created_at).fromNow()}</p>
-        </div>
-       
-          
-         
-        
+        </div>     
       </div>
     );
   }
 
-  voteClickHandler (e) {
-    e.preventDefault();
-    const article_id = this.props.article_id;
-    const mode = 'comment';
-    const id = e.target.id;
-    const input = e.target.name;
-    const prevVotes = this.props.comment.votes;
-    let newVotes;
-    if (input === 'up') newVotes = prevVotes + 1;
-    else  newVotes = prevVotes - 1;
-    this.setState({
-      votes: newVotes
-    });
-    this.props.putVote(input, id, mode, article_id);
-  }
 }
   
 const mapStateToProps = state => ({
@@ -78,18 +75,20 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  putVote: (input, id, mode, article_id) => {
-    dispatch(putVote(input, id, mode, article_id));
+  putVote: (input, id, category , article_id) => {
+    dispatch(putVote(input, id, category, article_id));
   }
 });
 
 CommentCard.propTypes = {
+  comment: PT.object.isRequired,
   comments: PT.array.isRequired,
   loading: PT.bool.isRequired,
   error: PT.any,
   putVote: PT.func.isRequired,
   article_id: PT.string.isRequired,
-  match: PT.any.isRequired
+  match: PT.any.isRequired,
+  removeHandler: PT.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentCard);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 const topics = ['football', 'cooking', 'coding'];
 
 const NavBar = () => {
@@ -26,5 +26,5 @@ const NavBar = () => {
     </nav>
   );
 };
-  
+
 export default NavBar;

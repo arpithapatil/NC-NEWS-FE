@@ -82,7 +82,7 @@ h4 a {
 .article-title-box {
     margin-left: 10px;
     align-items: center;
-    font-size: 1em;
+    font-size: 1.2em;
     color: black;
     font-family: 'Alegreya Sans', sans-serif;
     
@@ -165,7 +165,7 @@ a {
     color: rgb(22, 31, 30);
 }
 a:hover {
-    color: rgb(143, 0, 122);
+    color: black;
     text-decoration: none;
 }
 a:active {
@@ -185,7 +185,7 @@ a:active {
     border: 2px lightgray solid;
     box-shadow: 3px 6px 3px lightgray;
     padding: 20px 30px;
-    font-size: 2em;
+    font-size: 1.7em;
     text-align: justify;
     margin: 20px;
     font-family: 'Alegreya Sans', sans-serif;
@@ -197,7 +197,7 @@ a:active {
     border: solid white 5px;
     border-radius: 20px;
     padding: 20px 60px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin: 20px;
 }
 
@@ -235,7 +235,7 @@ a:active {
     border: solid lightgray ;
     border-radius: 5px;
     padding: 20px 30px 0 30px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-top: 10px; 
     box-shadow: 2px 5px 2px lightgray;
     font-family: 'Alegreya Sans', sans-serif; 
@@ -293,7 +293,7 @@ button {
     color: white;
     margin: 10px;
     margin-left:0px; 
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-family: 'Alegreya Sans', sans-serif; 
 }
 .comment-rmv-btn {
