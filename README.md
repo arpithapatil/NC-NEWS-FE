@@ -1,5 +1,5 @@
 
-# Northcoders News
+# Northcoders News FE
 
 Northcoders News is a social news aggregation, web content rating, and discussion website similar to [Reddit](https://www.reddit.com/). Articles are divided into topics and each article has user curated ratings that can be up or down voted using the [API](https://github.com/arpithapatil/NC-News-BE). Users can also add comments about an article which can also be up or down voted. A user can add comments and remove any comments which they have added.
 
@@ -41,7 +41,7 @@ Then the application should be accessible at http://localhost:9000.
 
 To run the tests run the following command
 ```
-npm t
+npm test
 ```
 All the actions and reducers have been tested using mocha , chai and nock
 
