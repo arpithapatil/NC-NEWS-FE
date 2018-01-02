@@ -33,7 +33,7 @@ class ArticleList extends React.Component {
     return (
       <div className='main container-fluid'>
         <div className='topic-articles'>
-          <h2>{topicTitle}</h2>
+          <h2 className='topic-title'>{topicTitle}</h2>
           <div className='row'>
             {this.props.articles.map((article) => {
               const title = article.title.split(' ').map((word) => {
