@@ -51,7 +51,7 @@ export const fetchArticles = () => {
     dispatch(fetchArticlesRequest());
     return axios.get(`${API_URL}/articles`)
       .then((res) => {
-        dispatch(fetchArticlesSuccess(res.data.articles));
+        dispatch(fetchArticlesSuccess(res.data));
       })
       .catch((error) => {
         dispatch(fetchArticlesFailure(error.message));
