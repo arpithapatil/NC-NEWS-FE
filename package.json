@@ -10,7 +10,9 @@
     "precommit": "npm test",
     "test": "mocha --require babel-register ./spec/*",
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "postinstall": "webpack -p",
+    "start":"node sever.js"
   },
   "keywords": [],
   "author": "",
@@ -41,16 +43,18 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "react-scripts": "1.0.7",
+    "express": "^4.16.2",
     "material-ui": "^1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.20.1",
+    "path": "^0.12.7",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.7",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
