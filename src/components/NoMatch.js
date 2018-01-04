@@ -5,7 +5,9 @@ const NoMatch = () => (
   <div>
     <h1>Something went wrong</h1>
     <br />
-    <Link to='/'>Go back to homepage</Link>
+    <div>
+      <Link to='/' className='nomatch'>Go back to homepage</Link>
+    </div>
   </div>
 );
 

@@ -21,14 +21,12 @@ class App extends React.Component {
             <div>
               <NavBar />
               <Switch>
-                <div className='body'>
-                  <Route exact path='/' component={HomePage} />
-                  <Route exact path='/:topic' component={ArticleList} />
-                  <Route exact path='/articles' component={ArticleList} />
-                  <Route exact path='/articles/:article_id' component={ArticleItem} />
-                  <Route exact path='/articles/:article_id/comment' component={Article}/>
-                  <Route path='/articles/:article_id/comments' component={Comments} />
-                </div>
+                <Route exact path='/' component={HomePage} />
+                <Route exact path='/:topic' component={ArticleList} />
+                <Route exact path='/articles' component={ArticleList} />
+                <Route exact path='/articles/:article_id' component={ArticleItem} />
+                <Route exact path='/articles/:article_id/comment' component={Article}/>
+                <Route path='/articles/:article_id/comments' component={Comments} />
                 <Route path='/*' component={NoMatch} />
               </Switch>
             </div>
