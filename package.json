@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint -- --fix",
     "precommit": "npm test",
     "test": "mocha --require babel-register ./spec/*",
-    "postinstall": "webpack -p",
+    "postinstall": "webpack --config webpack.config.js",
     "start":"node server.js"
   },
   "keywords": [],
