@@ -1,217 +1,186 @@
-.body {
-    background-color: whitesmoke;
+body {
+    background: whitesmoke;
     text-align: center;
     padding-top: 0px;
 }
-
+/* .body{
+    padding-top: 175px;
+}
+.navbar {
+    position: fixed;
+    width:100%;
+    z-index:1000;
+} */
 .navbar {
     background :linear-gradient(to right, rgba(255, 0, 179, 0), rgb(255, 0, 85));
     padding-top: 0px; 
 }
-
 .nav-title {
     color:black;
     text-decoration: none;
     font-size: 2em;
     font-family: 'Alegreya Sans', sans-serif;
 }
-
 .nav-title:hover {
     color:grey;
     text-decoration: none;
 }
-
 .nav-title:link {
     color: black;
     text-decoration: none;
 }
-
 .nav-topic {
     color:white;
     text-decoration: none;
-    font-size: 1.7em;
+    font-size: 1.2em;
     font-family: 'Alegreya Sans', sans-serif;   
 }
-
 .nav-topic:hover {
     color:black;
     text-decoration: none;
 }
-
 .navbar-left {
     padding-bottom: 10px;
     padding-top: 30px;
 }
-
 .navbar-right {
     padding: 18px 10px 100px 10px;
     font-size: 1.5em;
 }
 
 .articles {
-  
     background-color:white;
     border-radius: 5px;
     border:lightgray solid; 
-    font-size: 1em;
-    box-shadow: 1px 3px 1px lightgray;
-    margin-left: 350px;
+    font-size: 1.5em;
+    box-shadow: 1px 3px 1px lightgray; 
+    margin: 0 auto;
+    float:none;
     margin-bottom: 15px;
     font-family: 'Alegreya Sans', sans-serif;
 }
-
-.comment-link{
-    align-items: center;
-    font-size: 1.4em;
-    color: rgb(255, 0, 85);
+.h3{
+    float:none;
+    margin: 0 auto;
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
+.comment-link {
+    margin: 0 auto;
+    float:none;
+    color: rgb(255, 0, 85);
+}
 .row{
     margin-top: 15px;
 }
-
 .topic-title{
     font-size: 2.7em;
     text-align: center;
     color: rgb(255, 0, 85);
-    font-family: 'Alegreya Sans', sans-serif;
-    
+    font-family: 'Alegreya Sans', sans-serif;  
 }
-
 .mostpopular{
     font-size: 2.7em;
     text-align: center;
     color: rgb(255, 0, 85);
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: 'Alegreya Sans', sans-serif;  
 }
-
 .loading{
     font-size: 2.7em;
     color: rgb(255, 0, 85);
     font-family: 'Alegreya Sans', sans-serif;
-
 }
-
 h4 {
     font-size: 1.5em;
     margin: 10px;
     width: 100%;
 }
-
 h4 a {
     text-align: center;
 }
-
-.article-title-box {
-    margin-left: 10px;
-    align-items: center;
-    font-size: 1.2em;
-    color: black;
-    font-family: 'Alegreya Sans', sans-serif;
-    
+.article-title-box:hover {
+    color: rgb(255, 0, 85);    
 }
 .arrowup{
   width:1.5em;
 }
-
 .arrowdown{
     width:1.5em;
     margin-bottom: 15px;    
 }
-
 .vote-btn1{
     margin-top: 0px;
     width: 1.3em;
 }
-
 .vote-btn2{
 margin-top:0px;
 width: 1.3em; 
 }
-
 .vote-btn1c{
     margin-top: 0px;
     width: 1em;
 }
-
 .vote-btn2c{
 margin-top:0px;
 width: 1em; 
 }
-
 .vote-btn1:hover {
     width: 2.2em;
 }
-
 .vote-btn2:hover {
     width: 2.2em;
 }
-
 .vote-btn1c:hover {
     width: 2em;
 }
-
 .vote-btn2c:hover {
     width: 2em;
 }
-
 .vote-count{
-    margin-left: -30px;
-    margin-top:10px; 
+    margin-left: -30px; 
     font-size: 1.2em;
     align-items: center;
     color: rgb(255, 0, 85);
 }
-
 .vote-countc{
-  
     font-size: 1em;
     align-items: center;
     color: rgb(255, 0, 85);
 }
-
 .num{
-    margin-top: 5px;
-    font-size: 1.5em;
-    align-items: center;
+    padding-top: 10px;
+    margin: 0 auto;
+    color: rgb(255, 0, 85);
+    font-family: 'Alegreya Sans', sans-serif;  
 }
-
 .article-details p {
     font-size: 1.2em;
     color: rgb(46, 46, 46);    
 }
-
 .article-details {
     min-height: 90px; 
 }
-
 img {
     width: 4em;
 }
-
 .art-title {
     min-height: 120px;
 }
-
 a {
     color: rgb(22, 31, 30);
 }
-
 a:hover {
     color: black;
     text-decoration: none;
 }
-
 a:active {
     color: grey;
     text-decoration: none;
 }
-
 .comment-link:hover {
     color: black;
     font-weight: bold;
 }
-
 .article-item {
     background-color: white; 
     color: black;
@@ -224,7 +193,6 @@ a:active {
     margin: 20px;
     font-family: 'Alegreya Sans', sans-serif;
 }
-
 .article-comments {
     background-color: rgba(255, 255, 255, 0.509); 
     color: black;
@@ -234,36 +202,28 @@ a:active {
     font-size: 1.2em;
     margin: 20px;
 }
-
 .article-title {
     font-size: 1.5em;
     color: rgb(255, 0, 85);
 }
-
 .art-bod{
     padding-top: 0px;
-   margin-left: 100px;
-    
+   margin-left: 100px;   
 }
-
 .article-author {
     font-style: italic;    
 }
-
 .votes {
     float:left; 
 }
-
 .votes-article-item p{
     padding-left: 20px;
 }
-
 .comment-bod {
     font-size: 1em;
     text-align: justify;
     margin: 0;
 }
-
 .comment-item {
     background-color: white; 
     color: black;
@@ -275,7 +235,6 @@ a:active {
     box-shadow: 2px 5px 2px lightgray;
     font-family: 'Alegreya Sans', sans-serif;  
 }
-
 .comment-p {
     background: none;
     color: black;
@@ -284,11 +243,9 @@ a:active {
     padding-left: 0;
     padding-bottom: 20px;
 }
-
 button {
     outline: none;
 }
-
 .comment-author {
     padding-bottom: 0px;
     text-align: left;
@@ -296,18 +253,15 @@ button {
     color: rgb(255, 0, 85);
     padding:5px 10px;
 }
-
 .comment-component {
-    background-color: white; 
+    background-color:whitesmoke;
     color: black;
-    border: solid lightgray 3px;
+    border:solid lightgray 3px;
     border-radius: 10px;
     padding: 20px 10px;
     font-size: 1.5em;
     margin: 20px;
-
 }
-
 .comment-form {
     background-color:white; 
     color: black;
@@ -317,7 +271,6 @@ button {
     box-shadow: 2px 5px 2px lightgray;
     margin-top: 10px;
 }
-
 .comment-form .add-comment-form {
     width: 95%;
     border-radius: 10px;
@@ -325,7 +278,6 @@ button {
     margin-top: 1%;
     padding: 10px;
 }
-
 .comment-form .submit-form {
     border-radius: 5px;
     background:rgb(255, 0, 85);
@@ -336,7 +288,6 @@ button {
     font-size: 1.2em;
     font-family: 'Alegreya Sans', sans-serif; 
 }
-
 .comment-rmv-btn {
     background-color:lightgray;
     color: black;
@@ -344,48 +295,38 @@ button {
     padding: 5px, 10px;
     font-family: 'Alegreya Sans', sans-serif;  
 }
-
 .comment-date {
     float: left;
     color: black ;
-    font-weight: bold;
-    
+    font-weight: bold;   
 }
-
 .comment-body {
     padding-top: 10px;
 }
-
 input {
     outline: none;
 }
-
 .return-articles{
 text-align: left;
 padding-left: 0.8em;
 }
-
 .return-articles a {
     font-weight: bold;
 }
-
 i {
     border: solid black;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
 }
-
 .right {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
-
 .left {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
-
 .topic-articles{
     text-align: center;
     color: rgb(255, 0, 85);

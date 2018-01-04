@@ -5,23 +5,19 @@ import Comments from './Comments';
 import PT from 'prop-types';
 import Loading from './Load';
 
-class ArticleItem extends React.Component {
+class Article extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      commentFlag: false,
       votes: 0
     };
     this.voteClickHandler = this.voteClickHandler.bind(this);
-    this.showComments = this.showComments.bind(this);
-    this.hideComments = this.hideComments.bind(this);
   }
   componentDidMount() {
     const id = this.props.match.params.article_id;
     this.props.fetchArticleById(id);
-   
   }
- 
+
   voteClickHandler(event) {
     event.preventDefault();
     const category = 'article';
@@ -35,17 +31,6 @@ class ArticleItem extends React.Component {
       votes: newVotes
     });
     this.props.putVote(input, id, category);
-  }
-
-  showComments() {
-    this.setState({
-      commentFlag: true
-    });
-  }
-  hideComments() {
-    this.setState({
-      commentFlag: false
-    });
   }
 
   render() {
@@ -85,27 +70,17 @@ class ArticleItem extends React.Component {
               <p className='col-xs-12 col-md-11 article-author'>By {this.props.articles[0].created_by}</p>
             </div>
             <p>{this.props.articles[0].body}</p>
-            {(() => {
-              if (this.state.commentFlag || this.props.commentflag === 'true') {
-                return (
-                  <button className='comment-p' onClick={this.hideComments}>Hide comments</button>
-                );
-              }
-              else return (
-                <button className='comment-p' onClick={this.showComments}>Show comments</button>
-              );
-            })()}
+        
           </div>
 
           {(() => {
-            if (this.state.commentFlag || this.props.commentflag === 'true') {
-              return (
-                <div className='comment-component'>
-                  <Comments article_id={this.props.match.params.article_id} />
-                </div>
-              );
-            }
-          })()}
+            return (
+              <div className='comment-component'>
+                <Comments article_id={this.props.match.params.article_id} />
+              </div>
+            );
+          }
+          )()}
         </div>
       );
     }
@@ -114,9 +89,7 @@ class ArticleItem extends React.Component {
         <Loading />
       );
     }
-
   }
-
 }
 
 const mapStateToProps = (state) => ({
@@ -134,7 +107,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-ArticleItem.propTypes = {
+Article.propTypes = {
   articles: PT.array.isRequired,
   loading: PT.bool.isRequired,
   error: PT.any,
@@ -143,4 +116,4 @@ ArticleItem.propTypes = {
   match: PT.any.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleItem);
+export default connect(mapStateToProps, mapDispatchToProps)(Article);

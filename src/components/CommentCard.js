@@ -87,7 +87,6 @@ CommentCard.propTypes = {
   error: PT.any,
   putVote: PT.func.isRequired,
   article_id: PT.string.isRequired,
-  match: PT.any.isRequired,
   removeHandler: PT.func.isRequired
 };
 

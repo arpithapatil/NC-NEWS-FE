@@ -99,7 +99,7 @@ class Comments extends React.Component {
         <div className='main container-fluid'>
           <div>
             <div className="comment-form">
-              <input value={this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Add a comment. . . . ."></input><br />
+              <input value={this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Leave a comment. . . . ."></input><br />
               <input className='submit-form' onClick={this.submitHandler} type='submit' value="Post"></input>
             </div>
             {comments.map((comment) => {
@@ -123,7 +123,7 @@ class Comments extends React.Component {
           <div className='main container-fluid'>
             <div>
               <div className="comment-form">
-                <input value={this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Add a comment. . . . . "></input>
+                <input value={this.state.comment} className='add-comment-form' onChange={this.changeHandler} type='text' placeholder="Leave a comment. . . . . "></input>
                 <input className='submit-form' onClick={this.submitHandler} type='submit' value="Post"></input>
               </div>
             </div>
@@ -165,7 +165,7 @@ Comments.propTypes = {
   postComment: PT.func.isRequired,
   removeComment: PT.func.isRequired,
   article_id: PT.string.isRequired,
-  match: PT.any.isRequired
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);

@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import ArticleItem from './ArticleItem';
 import ArticleList from './ArticleList';
+import Article from './Article';
 import Comments from './Comments';
 import NavBar from './NavBar';
 import NoMatch from './NoMatch';
@@ -14,21 +15,26 @@ class App extends React.Component {
   }
   render() {
     return (
-      <BrowserRouter>
-        <section>
-          <div className='body'>
-            <NavBar />
-            <Switch>
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/:topic' component={ArticleList} />
-              <Route exact path='/articles' component={ArticleList} />
-              <Route exact path='/articles/:article_id' component={ArticleItem} />
-              <Route path='/articles/:article_id/comments' component={Comments} />
-              <Route path='/*' component={NoMatch} />
-            </Switch>
-          </div>
-        </section>
-      </BrowserRouter>
+      <div> 
+        <BrowserRouter>
+          <section>
+            <div>
+              <NavBar />
+              <Switch>
+                <div className='body'>
+                  <Route exact path='/' component={HomePage} />
+                  <Route exact path='/:topic' component={ArticleList} />
+                  <Route exact path='/articles' component={ArticleList} />
+                  <Route exact path='/articles/:article_id' component={ArticleItem} />
+                  <Route exact path='/articles/:article_id/comment' component={Article}/>
+                  <Route path='/articles/:article_id/comments' component={Comments} />
+                </div>
+                <Route path='/*' component={NoMatch} />
+              </Switch>
+            </div>
+          </section>
+        </BrowserRouter>
+      </div>
     );
   }
 }
