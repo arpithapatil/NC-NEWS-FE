@@ -3,6 +3,8 @@
 
 Northcoders News is a social news aggregation, web content rating, and discussion website similar to [Reddit](https://www.reddit.com/). Articles are divided into topics and each article has user curated ratings that can be up or down voted using the [API](https://github.com/arpithapatil/NC-News-BE). Users can also add comments about an article which can also be up or down voted. A user can add comments and remove any comments which they have added.
 
+The website is deployed on Heroku and can be found [here](https://ap-northcoders-news.herokuapp.com/)
+
 ### Prerequisites
 
 To run this project you will need node.js version 7 or above and npm installed locally.
@@ -33,9 +35,9 @@ npm install
 
 In order to run the application run the following command
 ```
-npm start
+node server.js
 ```
-Then the application should be accessible at http://localhost:9000.
+Then the application should be accessible at http://localhost:8080
 
 ## Running the tests
 
@@ -53,6 +55,7 @@ All the actions and reducers have been tested using mocha , chai and nock
 * [mocha](https://mochajs.org/)
 * [chai](http://chaijs.com/)
 * [nock](https://github.com/node-nock/nock)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
 
 ## Authors
-Arpitha Patil
+[Arpitha Patil](https://github.com/arpithapatil)
