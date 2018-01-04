@@ -11,8 +11,6 @@
     "test": "mocha --require babel-register ./spec/*",
     "start": "webpack -p",
     "dev": "webpack-dev-server"
-    // "postinstall": "webpack --config webpack.config.js",
-    // "start":"node server.js"
   },
   "keywords": [],
   "author": "",
