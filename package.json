@@ -12,7 +12,7 @@
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server",
     "postinstall": "webpack -p",
-    "start":"node sever.js"
+    "start":"node server.js"
   },
   "keywords": [],
   "author": "",
