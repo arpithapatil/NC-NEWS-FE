@@ -9,10 +9,8 @@
     "lint:fix": "npm run lint -- --fix",
     "precommit": "npm test",
     "build": "webpack -p",
-    "dev": "webpack-dev-server",
-    "test": "mocha --require babel-register ./spec/*",
-    "postinstall": "webpack --config webpack.config.js",
-    "start":"node server.js"
+    "start": "webpack-dev-server",
+    "test": "mocha --require babel-register ./spec/*"
   },
   "keywords": [],
   "author": "",

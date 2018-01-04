@@ -35,9 +35,9 @@ npm install
 
 In order to run the application run the following command
 ```
-node server.js
+npm start
 ```
-Then the application should be accessible at http://localhost:8080
+Then the application should be accessible at http://localhost:9000
 
 ## Running the tests
 
