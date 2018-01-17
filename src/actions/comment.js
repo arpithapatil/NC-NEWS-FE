@@ -33,6 +33,7 @@ export const postCommentFailure = (error) => ({
 
 export const voteCommentRequest = () => ({
   type: types.VOTE_COMMENTS_REQUEST
+  
 });
   
 export const voteCommentSuccess = (data) => ({
@@ -109,7 +110,7 @@ export const putVote = (input, id, item, article_id) => {
       dispatch(voteCommentRequest());
       return axios.put(`${API_URL}/${category}/${id}?vote=${input}`, {'article_id': article_id})
         .then((res) => {
-          return res.data.sort((a, b) => {
+          return [res.data].sort((a, b) => {
             return b.created_at - a.created_at;
           });
         })

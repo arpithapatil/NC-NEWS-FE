@@ -1,1 +1,1 @@
-export const API_URL = 'https://northcoders-news-zjo.herokuapp.com/api';
+export const API_URL = 'https://arpitha-patil-nc-news-backend.herokuapp.com/api';

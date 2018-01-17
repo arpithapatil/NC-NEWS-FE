@@ -94,7 +94,7 @@ export const putVote = (input, id, item) => {
       dispatch(voteArticleRequest());
       return axios.put(`${API_URL}/${category}/${id}?vote=${input}`)
         .then((res) => {
-          dispatch(voteArticleSuccess(res.data));
+          dispatch(voteArticleSuccess([res.data.article]));
         })
         .catch((error) => {
           dispatch(voteArticleFailure(error.message));

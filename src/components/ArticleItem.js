@@ -86,7 +86,7 @@ class ArticleItem extends React.Component {
             </div>
             <p>{this.props.articles[0].body}</p>
             {(() => {
-              if (this.state.commentFlag || this.props.commentflag === 'true') {
+              if (this.state.commentFlag) {
                 return (
                   <button className='comment-p' onClick={this.hideComments}>Hide comments</button>
                 );
@@ -98,7 +98,7 @@ class ArticleItem extends React.Component {
           </div>
 
           {(() => {
-            if (this.state.commentFlag || this.props.commentflag === 'true') {
+            if (this.state.commentFlag) {
               return (
                 <div className='comment-component'>
                   <Comments article_id={this.props.match.params.article_id} />
@@ -122,7 +122,7 @@ class ArticleItem extends React.Component {
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
   loading: state.articles.loading,
-  error: state.articles.error
+  error: state.articles.error,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -30,7 +30,7 @@ export default (prevState = getInitialState(), action) => {
   case types.POST_COMMENTS_REQUEST:
     return Object.assign({}, prevState, {
       loading: true,
-      data: [],
+      data: prevState.data,
       error: null
     });
   case types.POST_COMMENTS_SUCCESS:
@@ -45,27 +45,9 @@ export default (prevState = getInitialState(), action) => {
       data: [],
       error: action.payload
     });
-  case types.VOTE_COMMENTS_REQUEST:
-    return Object.assign({}, prevState, {
-      loading: true,
-      data: prevState.data,
-      error: null
-    });
-  case types.VOTE_COMMENTS_SUCCESS:
-    return Object.assign({}, prevState, {
-      loading: false,
-      data: action.payload,
-      error: null
-    });
-  case types.VOTE_COMMENTS_FAILURE:
-    return Object.assign({}, prevState, {
-      loading: false,
-      data: [],
-      error: action.payload
-    });
   case types.REMOVE_COMMENTS_REQUEST:
     return Object.assign({}, prevState, {
-      loading: true,
+      loading: false,
       data: prevState.data,
       error: null
     });
@@ -85,3 +67,4 @@ export default (prevState = getInitialState(), action) => {
     return prevState;
   }
 };
+

@@ -25,6 +25,8 @@ class Comments extends React.Component {
     else id = this.props.match.params.article_id;
     this.props.fetchComments(id);
   }
+
+  
   componentWillReceiveProps(nextProps) {
     if (nextProps.comments.length !== this.props.comments.length) {
       this.setState({
@@ -54,16 +56,18 @@ class Comments extends React.Component {
       votes: 0,
       created_at: Date.now()
     }];
+  
+
+    this.props.postComment(article_id, comment);
+    this.setState({
+      comment: ''
+    });
+
     const prevComments = this.props.comments;
     const newComments = newComment.concat(prevComments);
     this.setState({
       commentList: newComments,
       loadingFlag: true
-    });
-
-    this.props.postComment(article_id, comment);
-    this.setState({
-      comment: ''
     });
   }
 
@@ -103,7 +107,7 @@ class Comments extends React.Component {
               <input className='submit-form' onClick={this.submitHandler} type='submit' value="Post"></input>
             </div>
             {comments.map((comment) => {
-              return (
+              return(
                 <CommentCard
                   key={comment.created_at}
                   loading={this.props.loading}
@@ -142,7 +146,7 @@ class Comments extends React.Component {
 const mapStateToProps = state => ({
   comments: state.comments.data,
   loading: state.comments.loading,
-  error: state.comments.error
+
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -160,12 +164,11 @@ const mapDispatchToProps = dispatch => ({
 Comments.propTypes = {
   comments: PT.array.isRequired,
   loading: PT.bool.isRequired,
-  error: PT.any,
   fetchComments: PT.func.isRequired,
   postComment: PT.func.isRequired,
   removeComment: PT.func.isRequired,
   article_id: PT.string.isRequired,
-
+  
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);

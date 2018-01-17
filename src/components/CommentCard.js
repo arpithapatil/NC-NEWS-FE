@@ -37,7 +37,7 @@ class CommentCard extends React.Component {
           <div className='votes'>
             <div className='col-xs-12 col-md-12'>
               <input type="image" src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/256x256/plain/arrow_up.png" name="up" onClick={this.voteClickHandler} className="vote-btn1c" id={comment._id} />
-            
+
               {(() => {
                 if (this.props.loading) {
                   return (
@@ -54,8 +54,7 @@ class CommentCard extends React.Component {
             </div>
           </div>
           <p className='comment-author  col-md-4'>By {comment.created_by}</p>
-          <button className='comment-rmv-btn ' name={comment.belongs_to} id={comment._id} onClick={this.props.removeHandler}> remove </button>
-          
+          {comment.created_by ==='northcoder'? <button className='comment-rmv-btn ' name={comment.belongs_to} id={comment._id} onClick={this.props.removeHandler}> remove </button> : <div></div> }         
         </div>
         <div className='row comment-body'>
           <p className='comment-bod'>{comment.body}</p>
@@ -69,9 +68,8 @@ class CommentCard extends React.Component {
 }
   
 const mapStateToProps = state => ({
-  comments: state.comments.data,
-  loading: state.comments.loading,
-  error: state.comments.error
+  comments: state.commentsvote.data,
+ 
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -81,10 +79,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 CommentCard.propTypes = {
-  comment: PT.object.isRequired,
+  comment:PT.object.isRequired,
   comments: PT.array.isRequired,
   loading: PT.bool.isRequired,
-  error: PT.any,
   putVote: PT.func.isRequired,
   article_id: PT.string.isRequired,
   removeHandler: PT.func.isRequired
