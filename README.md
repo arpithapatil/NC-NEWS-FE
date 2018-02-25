@@ -37,7 +37,7 @@ In order to run the application run the following command
 ```
 npm start
 ```
-Then the application should be accessible at http://localhost:9000
+Then the application should be accessible at http://localhost:8080
 
 ## Running the tests
 
